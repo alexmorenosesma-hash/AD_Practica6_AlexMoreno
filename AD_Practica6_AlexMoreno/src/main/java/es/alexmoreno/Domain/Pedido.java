@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
@@ -20,10 +23,15 @@ public class Pedido {
     @Column (name ="cliente",length = 100)
     private String cliente;
     @Column (name = "estado",length = 100)
+    //Estado es un posible enum
     private String estado;
     @Column (name = "total")
     private double total;
-    @Column (name = "productos")
+    //La relacion es many to many porque los pedidos pueden tener varios pedidos y los productos pueden estar en varios pedidos
+    @ManyToMany
+    @JoinTable (name = "pedido_producto",
+                joinColumns = @JoinColumn(name = "idPedido"),
+                inverseJoinColumns = @JoinColumn(name = "idPedido"))
     private List<Producto> productos;
 
     public Pedido() {
@@ -83,6 +91,16 @@ public class Pedido {
 
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
+    }
+
+    @Override
+    public String toString() {
+        return "Id pedido:"+idPedido
+                +"\nFecha:"+fecha
+                +"\nCliente:"+cliente
+                +"\nEstado:"+estado
+                +"\nPrecio total:"+total
+                +"\nProdutos:"+productos;
     }
     
 }

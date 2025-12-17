@@ -18,10 +18,10 @@ public class Producto {
     @Column(name = "descripcion",length = 255)
     private String descripcion;
     @Column(name = "precio")
-    //a
     private double precio;
     @Column(name = "cantidad")
     private int cantidad;
+    //La cetogoria prodia ser un enum
     @Column(name = "categoria")
     private String categoria;
 
