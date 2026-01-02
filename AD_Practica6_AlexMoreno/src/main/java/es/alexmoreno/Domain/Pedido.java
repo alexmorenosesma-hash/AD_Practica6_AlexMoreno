@@ -31,7 +31,7 @@ public class Pedido {
     @ManyToMany
     @JoinTable (name = "pedido_producto",
                 joinColumns = @JoinColumn(name = "idPedido"),
-                inverseJoinColumns = @JoinColumn(name = "idPedido"))
+                inverseJoinColumns = @JoinColumn(name = "idProducto"))
     private List<Producto> productos;
 
     public Pedido() {
