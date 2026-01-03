@@ -19,6 +19,11 @@ public class PedidoService {
     PedidoRepository pedidoRepository;
     
     @Transactional
+    public Pedido buscarPorId(long id){
+        return pedidoRepository.findById(id).orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+    }
+    
+    @Transactional
     public void añadirProductoPedido(Producto producto,Pedido pedido){
         pedido.getProductos().add(producto);
         pedidoRepository.save(pedido);
